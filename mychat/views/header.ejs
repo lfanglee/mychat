@@ -1,0 +1,57 @@
+<div class="wrapper">
+<div class="personalInfo">
+  <div class="title">
+    <h1>个人信息</h1>
+  </div>
+  <div class="main">
+  <% if (locals.username) { %>
+        <div id="nickname">
+            <%=locals.username %> 
+        </div>
+       <% } %> 
+  </div>
+</div>
+<div class="talk-window">
+    <div class="banner">
+        <h1 align='center'><span id="status"></span></h1><input type="button" value="关闭" id="close-btn">
+        
+    </div>
+    <div id="historyMsg">
+    </div>
+    <div class="controls" >
+        <div class="items">
+            <input id="font-family" type="button" value="字体" />
+            <ul id="font-selector">
+              <li value='Arial, Helvetica, sans-serif'>Arial</li>
+              <li value='Georgia, serif'>Georgia</li>
+              <li value='Impact, Charcoal, sans-serif'>Impact</li>
+              <li value='Courier, monospace'>Courier New</li>
+              <li value="'Times New Roman', Times, serif">Times New Romam</li>
+              <li value="'Trebuchet MS', Helvetica, sans-serif">Trebuchet</li>
+              <li value='Verdana, Geneva, sans-serif'>Verdana</li>
+            </ul>
+            <input id="font-size" type="button" value="字号" />
+            <ul id="font-sizeSelect">
+              <li>8</li>
+              <li>10</li>
+              <li>12</li>
+              <li>14</li>
+              <li>18</li>
+              <li>24</li>
+              <li>36</li>
+            </ul>
+            <div id="fontEdit">
+              <div id="boldset" class="boldset"></div>
+            </div>
+            <div id="fontEdit">
+              <div id="iset" class="iset"></div>
+            </div>
+        </div>
+        <input type="text" id="messageInput" placeHolder="enter to send" />
+        <input id="sendBtn" type="button" value="SEND">
+        <div id="emojiWrapper">
+        </div>
+    </div>
+</div>
+<div class="fixclear"></div>
+</div>

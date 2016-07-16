@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<script type="text/javascript" src="javascripts/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="javascripts/index.js"></script>
+</head>
+<body>
+	<div id="desk">
+		<ul>
+			<li class="window-item" title="QQ" id="chat">
+				<img src="images/QQtalk.jpg" alt="">
+				<span>QQ</span>
+				<em></em>
+			</li>
+			<div class="window" id="qq">
+				<div style="opacity: 0.9" class="title-frame" id="qqTitle">
+                    <h3>QQ</h3>
+                    <a class="close-window" href="/login" target="qq">关闭</a>
+                    <a class="max-big">向下还原</a>
+                    <a class="reload" name="reloadQQ" onclick="window.open(document.all.qq.src,'qq','')">刷新</a>
+                    <div class="fixclear"></div>
+                </div>
+                <div class="window-frame" id="qqWindow">
+                    <iframe name="qq" id="frameQQ" frameborder="0" src="/login">
+
+                    </iframe>
+                </div>
+			</div>
+			<li class="window-item" title="Photo" id="">
+				<img src="images/bool.jpg" alt="">
+				<span>Photo</span>
+				<em></em>
+			</li>
+			<div class="window" id="photo">
+				<div style="opacity: 0.9" class="title-frame" id="photoTitle">
+                    <h3>Photo</h3>
+                    <a class="close-window">关闭</a>
+                    <a class="max-big">向下还原</a>
+                    <a class="reload" name="reloadPhoto"onclick="window.open(document.all.photo.src,'photo','')">刷新</a>
+                    <div class="fixclear"></div>
+                </div>
+                <div class="window-frame">
+                    <iframe name="photo" id="framePhoto" frameborder="0" src="">
+
+                    </iframe>
+                </div>
+			</div>
+			<li class="window-item" title="Baidu" id="">
+				<img src="images/baidu.jpg" alt="">
+				<span>Baidu</span>
+				<em></em>
+			</li>
+			<div class="window" id="baidu">
+				<div style="opacity: 0.9" class="title-frame" id="baiduTitle">
+                    <h3>Baidu</h3>
+                    <a class="close-window">关闭</a>
+                    <a class="max-big">最大化</a>
+                    <a class="max-small">还原</a>
+                    <a class="reload" name="reloadBaidu"onclick="window.open(document.all.baidu.src,'baidu','')">刷新</a>
+                    <div class="fixclear"></div>
+                </div>
+                <div class="window-frame">
+                    <iframe name="baidu" id="frameBaidu" frameborder="0" src="https://www.baidu.com/">
+
+                    </iframe>
+                </div>
+			</div>
+			<div class="fixclear"></div>
+		</ul>
+	</div>
+	<div class="bottom">
+		<ul id="bottom-ul">
+			<li>
+				<img src="">
+				<h2></h2>
+			</li>
+		</ul>
+		<div id="daytime"></div>
+	</div>
+</body>
+</html>

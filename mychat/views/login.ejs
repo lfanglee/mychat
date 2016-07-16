@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">       
+    <title><%= title %></title>
+  
+  <style type="text/css">
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      a{text-decoration: none;}
+      html,body{
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        background: url(../images/qqbg.jpg) no-repeat scroll top center;
+        background-size: 100% 100%;
+      }
+      .container{
+        width: 440px;
+        margin: 0 auto;
+        padding: 100px 0;
+      }
+      h2{
+        text-align: center;
+        font: 35px/1.8 Microsoft YaHei,simsong;
+      }
+      input[type="text"],input[type="password"]{
+        display: block;
+        padding: 3px 2px;
+        height: 40px;
+        width: 400px;
+        margin: 20px 20px;
+        box-shadow: none;
+        background-color: #ffffff;
+        border-radius: 5px;
+        font-size: 20px;
+        text-indent: 10px;
+        font-family: "黑体",helvetica, arial, verdana;
+      }
+      label{
+        display: block;
+        margin: 20px;
+      }
+      #btnSub{
+        width: 100px;
+        height: 42px;
+        background-color: #528BB8;
+        border: 1px solid #044062;
+        border-radius: 5px;
+        margin-left: 20px;
+        font-size: 14px;
+        color: #ffffff;
+      }
+      .btn-link{
+        margin-left: 10px;
+      }
+      #errorTip{
+        border: 1px soid #528BB8;
+        border-radius: 4px;
+        background: #52b8a6;
+        color: red;
+        line-height: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div id="container" class="container">
+       <% if (locals.success) { %> 
+          <div class="alert-success"> 
+            <%- success %> 
+          </div> 
+       <% } %> 
+
+      <% if (locals.error) { %> 
+        <div class="alert-warning"> 
+          <%= error %> 
+        </div> 
+      <% } %> 
+      <div id="errorTip" class="alert alert-warning" align="center"></div>
+      <!-- <form class="form-login" role="form" method="post"> -->
+        <h2 class="login-heading">登录</h2>
+        <input id="username" name="username" type="text" class="form-control" placeholder="用户名" required autofocus />
+            <input id="password" name="password" type="password" class="form-control" placeholder="密码" required /> 
+        <label class="checkbox">
+          <input name="chbRem" id="chbRem" type="checkbox" value="remember-me"> 记住密码
+        </label>              
+        <button id="btnSub" class="btn btn-lg btn-primary">登  录</button>
+        <a class="btn-link" href="/reg" role="button">注  册</a>
+
+      <!-- </form> -->
+            
+    </div> 
+  </body>
+</html>
+
+<script src="/javascripts/jquery-2.1.3.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+    $(function(){
+        $('#btnSub').click(function(){           
+            var 
+            $username = $('#username'),
+            usernameVal = $.trim($username.val()),            
+            $password = $('#password'),
+            passwordVal = $.trim($password.val());
+            
+            if(usernameVal.length === 0)
+            {
+                $("#errorTip").text('用户名不能为空');             
+                $username.focus();
+                return false;
+            }
+
+            if(passwordVal.length === 0)
+            {                
+                $("#errorTip").text('密码不能为空'); 
+                $username.focus();
+                return false;
+            }
+            
+            $.ajax({
+              type: 'POST',
+              url: '/login',
+              datatype: 'json',
+              data: {
+                username: usernameVal,
+                password: passwordVal
+              },
+              success: function(data){
+                if(data){
+                  $('#errorTip').text(data.message);
+                  if(data.status==='success'){
+                    window.location='/index';
+                  }
+                }
+              }
+            });                                          
+        })
+
+        //实现回车键登录
+        $(document).keydown(function(e){
+          if(e.keyCode == 13) {
+            $('#btnSub').click();
+          }
+        });
+    });
+
+</script>
