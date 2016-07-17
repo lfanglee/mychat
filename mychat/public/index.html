@@ -21,10 +21,12 @@
                     <h3>QQ</h3>
                     <a class="close-window" href="/login" target="qq">关闭</a>
                     <a class="max-big">向下还原</a>
+                    <a id="min">最小化</a>
                     <a class="reload" name="reloadQQ" onclick="window.open(document.all.qq.src,'qq','')">刷新</a>
                     <div class="fixclear"></div>
                 </div>
                 <div class="window-frame" id="qqWindow">
+                	<div class="mask" id="qqmask"></div>
                     <iframe name="qq" id="frameQQ" frameborder="0" src="/login">
 
                     </iframe>
@@ -44,6 +46,7 @@
                     <div class="fixclear"></div>
                 </div>
                 <div class="window-frame">
+                	<div class="mask" id="photomask"></div>
                     <iframe name="photo" id="framePhoto" frameborder="0" src="">
 
                     </iframe>
@@ -64,6 +67,7 @@
                     <div class="fixclear"></div>
                 </div>
                 <div class="window-frame">
+                	<div class="mask" id="baidumask"></div>
                     <iframe name="baidu" id="frameBaidu" frameborder="0" src="https://www.baidu.com/">
 
                     </iframe>
@@ -77,6 +81,7 @@
 			<li>
 				<img src="">
 				<h2></h2>
+				<p id="tip"></p>
 			</li>
 		</ul>
 		<div id="daytime"></div>

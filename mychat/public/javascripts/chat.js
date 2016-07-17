@@ -2,6 +2,8 @@ var fontSizeT='20px';
 var font_familyT="Microsoft YaHei,simsong";
 var iT=false;
 var boldT=false;
+var msg=parent.msgP;
+var min=parent.minP;
 
 window.onload = function() {
     var chat = new Chat();
@@ -24,6 +26,9 @@ Chat.prototype = {
         });
         this.socket.on('newMsg', function(user, msg, color,fontSize,font_family,bold,i) {
             that._displayNewMsg(user, msg, color ,fontSize,font_family,bold,i);
+            if(parent.minP===true){
+                parent.msgP++;
+            }
         });
         document.getElementById('sendBtn').addEventListener('click', function() {
             var messageInput = document.getElementById('messageInput'),

@@ -4,19 +4,21 @@ $(document).ready(function() {
         var itemName = $(this).attr('title');
         var itemImg = $(this).find('img').attr('src');
 
+        if (itemName === 'QQ') { msgP = 0;
+            minP = false; }
         $('#bottom-ul li h2').text(itemName);
         $('#bottom-ul img').attr('src', itemImg);
         $('#bottom-ul').show();
 
         if ($(this).next('div').attr('id') === 'qq') {
-            moveWindow($(this).next('div').children('div.title-frame').attr('id'), $(this).next('div').attr('id'), 1);
+            moveWindow($(this).next('div').attr('id'), $(this).next('div').attr('id'), 1);
 
         }
         if ($(this).next('div').attr('id') === 'photo') {
-            moveWindow($(this).next('div').children('div.title-frame').attr('id'), $(this).next('div').attr('id'), 2);
+            moveWindow($(this).next('div').attr('id'), $(this).next('div').attr('id'), 2);
         }
-        if ($(this).next('div').attr('id') === 'baidu'){
-            moveWindow($(this).next('div').children('div.title-frame').attr('id'), $(this).next('div').attr('id'), 3);
+        if ($(this).next('div').attr('id') === 'baidu') {
+            moveWindow($(this).next('div').attr('id'), $(this).next('div').attr('id'), 3);
 
         }
 
@@ -62,6 +64,13 @@ function startTime() {
     m = checkTime(m);
     s = checkTime(s);
     document.getElementById('daytime').innerHTML = h + ":" + m + ":" + s;
+
+    if (msgP != 0) {
+        g('tip').innerHTML = msgP;
+        g('tip').style.background = 'red';
+    }
+
+
     setTimeout('startTime()', 500);
 }
 
@@ -118,11 +127,13 @@ function moveWindow(windowTitle, window, isDraging) {
         if (isDraging === 3) {
             isDraging3 = true;
         }
+        document.getElementById('qqmask').style.display = 'block';
+        document.getElementById('photomask').style.display = 'block';
+        document.getElementById('baidumask').style.display = 'block';
     });
 
-    g(windowTitle).onmousemove = function(e) {
+    g(window).onmousemove = function(e) {
         var e = e || window.event;
-
         var mouseX = e.pageX;
         var mouseY = e.pageY;
 
@@ -144,33 +155,52 @@ function moveWindow(windowTitle, window, isDraging) {
             moveX = mouseX - mouseOffsetX;
             moveY = mouseY - mouseOffsetY;
 
-            // var pageWidth = document.documentElement.clientWidth;
-            // var pageHeight = document.documentElement.clientHeight;
+            var pageWidth = document.documentElement.clientWidth;
+            var pageHeight = document.documentElement.clientHeight;
 
-            // var dialogWidth = g(window).offsetWidth;
-            // var dialogHeight = g(window).offsetHeight;
+            var dialogWidth = g(window).offsetWidth;
+            var dialogHeight = g(window).offsetHeight;
 
-            // var maxX = pageWidth - dialogWidth;
-            // var maxY = pageHeight - dialogHeight;
+            var maxX = pageWidth - dialogWidth;
+            var maxY = pageHeight - dialogHeight;
 
-            // moveX = Math.min(maxX, Math.max(0, moveX));
-            // moveY = Math.min(maxY, Math.max(0, moveY));
+            //moveX = Math.min(maxX, Math.max(0, moveX));
+            moveY = Math.min(maxY, Math.max(0, moveY));
 
             g(window).style.left = moveX + 'px';
             g(window).style.top = moveY + 'px';
         }
     };
-    g(windowTitle).onmouseup = function() {
+    g(window).onmouseup = function() {
         isDraging1 = false;
         isDraging2 = false;
         isDraging3 = false;
+        document.getElementById('qqmask').style.display = 'none';
+        document.getElementById('photomask').style.display = 'none';
+        document.getElementById('baidumask').style.display = 'none';
     };
 }
 
-
+var msgP = 0;
+var minP = false;
 
 window.onload = function() {
     startTime();
+
+    g('min').onclick = function() {
+        minP = true;
+        g('qq').style.display = 'none';
+    };
+
+    g('bottom-ul').onclick = function(){
+        var temp=$('#bottom-ul li h2').text();
+        var show =function(id){
+            document.getElementById(id).style.display='block';
+        };
+        if(temp==='QQ'){show('qq');}
+        if(temp==='photo'){show('photo');}
+        if(temp==='baidu'){show('baidu');}
+    };
 
 
 };
