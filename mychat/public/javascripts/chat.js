@@ -1,9 +1,11 @@
-var fontSizeT='20px';
-var font_familyT="Microsoft YaHei,simsong";
-var iT=false;
-var boldT=false;
-var msg=parent.msgP;
-var min=parent.minP;
+var fontSizeT = '20px';
+var font_familyT = "Microsoft YaHei,simsong";
+var iT = false;
+var boldT = false;
+var Users = [];
+
+var msg = parent.msgP;
+var min = parent.minP;
 
 window.onload = function() {
     var chat = new Chat();
@@ -18,27 +20,42 @@ Chat.prototype = {
         this.socket = io.connect();
         var nickName = document.getElementById('nickname').innerHTML;
         that.socket.emit('login', nickName);
-        this.socket.on('system', function(nickName, userCount, type) {
+        this.socket.on('system', function(nickName, userCount, type, users) {
             var msg = nickName + (type == 'login' ? ' joined' : ' left');
-            that._displayNewMsg('system ', msg, 'red','20px','Microsoft YaHei,simsong','normal','normal');
+            that._displayNewMsg('system ', msg, 'red', '20px', 'Microsoft YaHei,simsong', 'normal', 'normal');
             document.getElementById('status').textContent = userCount + (userCount > 1 ? ' users' : ' user') + ' online';
-
+            
+            Users=users;
+            var members=[];
+            document.getElementById('members').innerHTML='';
+            for(var i=0;i<Users.length;i++){
+                var container = document.getElementById('members');                  
+                members[i]=document.createElement('div');
+                members[i].innerHTML=Users[i];
+                members[i].style.height = '40px';
+                members[i].style.lineHeight = '40px';
+                members[i].style.fontSize = '14px';
+                members[i].style.textIndent = '40px';
+                members[i].style.backgroundColor = '#fff';
+                members[i].style.border = '1px solid grey';
+                container.appendChild(members[i]);
+            }
         });
-        this.socket.on('newMsg', function(user, msg, color,fontSize,font_family,bold,i) {
-            that._displayNewMsg(user, msg, color ,fontSize,font_family,bold,i);
-            if(parent.minP===true){
+        this.socket.on('newMsg', function(user, msg, color, fontSize, font_family, bold, i) {
+            that._displayNewMsg(user, msg, color, fontSize, font_family, bold, i);
+            if (parent.minP === true) {
                 parent.msgP++;
             }
         });
         document.getElementById('sendBtn').addEventListener('click', function() {
             var messageInput = document.getElementById('messageInput'),
                 msg = messageInput.value,
-                color=null;
+                color = null;
             messageInput.value = '';
             messageInput.focus();
             if (msg.trim().length != 0) {
-                that.socket.emit('postMsg', msg, color , fontSizeT,font_familyT,boldT,iT);
-                that._displayNewMsg('me', msg, color,fontSizeT,font_familyT,boldT,iT);
+                that.socket.emit('postMsg', msg, color, fontSizeT, font_familyT, boldT, iT);
+                that._displayNewMsg('me', msg, color, fontSizeT, font_familyT, boldT, iT);
                 return;
             };
         }, false);
@@ -48,15 +65,15 @@ Chat.prototype = {
                 color = null;
             if (e.keyCode == 13 && msg.trim().length != 0) {
                 messageInput.value = '';
-                that.socket.emit('postMsg', msg, color,fontSizeT,font_familyT,boldT,iT);
-                that._displayNewMsg('me', msg, color ,fontSizeT,font_familyT,boldT,iT);
+                that.socket.emit('postMsg', msg, color, fontSizeT, font_familyT, boldT, iT);
+                that._displayNewMsg('me', msg, color, fontSizeT, font_familyT, boldT, iT);
             };
         }, false);
-        document.getElementById('close-btn').addEventListener('click',function(){
-            window.location='/logout';
+        document.getElementById('close-btn').addEventListener('click', function() {
+            window.location = '/logout';
         });
     },
-    _displayNewMsg: function(user, msg, color,fontSize ,font_family,bold,i) {
+    _displayNewMsg: function(user, msg, color, fontSize, font_family, bold, i) {
         var container = document.getElementById('historyMsg'),
             timeToDisplay = document.createElement('p'),
             userToDisplay = document.createElement('span'),
@@ -80,17 +97,15 @@ Chat.prototype = {
         userToDisplay.style.lineHeight = '26px';
         msgToDisplay.style.backgroundColor = 'blue';
         msgToDisplay.style.fontSize = fontSize;
-        if(bold===true){msgToDisplay.style.fontWeight='bold';}
-            else{
-                msgToDisplay.style.fontWeight='normal';
-            }
-        if(i===true){msgToDisplay.style.fontStyle='italic';}
-        else{
-            msgToDisplay.style.fontStyle='normal';
+        if (bold === true) { msgToDisplay.style.fontWeight = 'bold'; } else {
+            msgToDisplay.style.fontWeight = 'normal';
+        }
+        if (i === true) { msgToDisplay.style.fontStyle = 'italic'; } else {
+            msgToDisplay.style.fontStyle = 'normal';
         }
         msgToDisplay.style.padding = '3px';
         msgToDisplay.style.borderRadius = '5px';
-        msgToDisplay.style.fontFamily=font_family;
+        msgToDisplay.style.fontFamily = font_family;
         msgToDisplay.style.margin = '10px';
         timeToDisplay.style.textAlign = 'center';
 

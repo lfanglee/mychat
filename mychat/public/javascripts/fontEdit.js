@@ -6,6 +6,8 @@ $(function() {
         $('#font-sizeSelect').show();
     });
     
+
+    //实现点击按钮之外的地方时隐藏菜单
     $(document).bind("click",function(e){ 
 		var target = $(e.target); 
 		if(target.closest("#font-family").length == 0){

@@ -68,6 +68,9 @@ function startTime() {
     if (msgP != 0) {
         g('tip').innerHTML = msgP;
         g('tip').style.background = 'red';
+    }else{
+        g('tip').innerHTML = '';
+        g('tip').style.background = 'transparent';
     }
 
 
@@ -197,6 +200,7 @@ window.onload = function() {
         var show =function(id){
             document.getElementById(id).style.display='block';
         };
+        msgP = 0;
         if(temp==='QQ'){show('qq');}
         if(temp==='photo'){show('photo');}
         if(temp==='baidu'){show('baidu');}

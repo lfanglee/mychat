@@ -21,7 +21,7 @@ router.post('/', function(req, res) {
             {
                 // res.locals.error = '用户名或密码有误';
                 // res.render('login',{title:TITLE_LOGIN});
-                res.send({status:'failed',message:'用户名或密码有误'})
+                res.send({status:'failed',message:'用户名或密码有误'});
                 return;
             }
             else
@@ -34,7 +34,7 @@ router.post('/', function(req, res) {
                 res.locals.username = userName;
                 req.session.username = res.locals.username;  
                 console.log(req.session.username);
-                console.log('adfadfffffffffffffffffffffffff'+results);
+                console.log('ffffffffffffffffffffffffffffff'+results);
                 res.send({status:'success',message:''});
                 return;
             } 

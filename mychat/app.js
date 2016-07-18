@@ -14,6 +14,7 @@ var login = require('./routes/login');
 var logout = require('./routes/logout');
 var index = require('./routes/index');
 var ajax = require('./routes/ajax');
+var msgAjax = require('./routes/msgAjax');
 
 var app = express(),
     server = require('http').createServer(app),
@@ -40,6 +41,7 @@ app.use('/login', login);
 app.use('/logout',logout);
 app.use('/index',index);
 app.use('/ajax',ajax);
+app.use('/msgAjax',msgAjax);
 
 
 // catch 404 and forward to error handler
@@ -80,12 +82,12 @@ io.sockets.on('connection', function(socket) {
             socket.nickname = nickname;
             users.push(nickname);
             socket.emit('loginSuccess');
-            io.sockets.emit('system', nickname, users.length, 'login');
+            io.sockets.emit('system', nickname, users.length, 'login',users);
     });
     //user leaves
     socket.on('disconnect', function() {
         users.splice(socket.userIndex, 1);
-        socket.broadcast.emit('system', socket.nickname, users.length, 'logout');
+        socket.broadcast.emit('system', socket.nickname, users.length, 'logout',users);
     });
     //new message get
     socket.on('postMsg', function(msg, color,fontSize,font_family,bold,i) {

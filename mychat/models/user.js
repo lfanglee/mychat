@@ -29,7 +29,7 @@ pool.getConnection(function(err, connection) {
     });
 
     //保存数据
-    User.prototype.save = function save(callback) {
+    User.prototype.save = function(callback) {
         var user = {
             username: this.username,
             userpass: this.userpass
@@ -43,13 +43,13 @@ pool.getConnection(function(err, connection) {
                 return;
             }
 
-            console.log("invoked[save]");
+            console.log("save");
             callback(err,result);                     
         });       
     };
 
     //根据用户名得到用户数量
-    User.getUserNumByName = function getUserNumByName(username, callback) {
+    User.getUserNumByName = function(username, callback) {
 
         var getUserNumByName_Sql = "SELECT COUNT(1) AS num FROM userinfo WHERE username = ?";
 
@@ -59,13 +59,13 @@ pool.getConnection(function(err, connection) {
                 return;
             }
 
-            console.log("invoked[getUserNumByName]");
+            console.log("getUserNumByName");
             callback(err,result);                     
         });        
     };
 
     //根据用户名得到用户信息
-    User.getUserByUserName = function getUserByUserName(username, callback) {
+    User.getUserByUserName = function(username, callback) {
 
         var getUserByUserName_Sql = "SELECT * FROM userinfo WHERE username = ?";
 
@@ -75,7 +75,7 @@ pool.getConnection(function(err, connection) {
                 return;
             }
 
-            console.log("invoked[getUserByUserName]");
+            console.log("getUserByUserName");
             callback(err,results);                                 
         });        
     };
