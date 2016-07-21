@@ -110,7 +110,9 @@
             $username = $('#username'),
             usernameVal = $.trim($username.val()),            
             $password = $('#password'),
-            passwordVal = $.trim($password.val());
+            passwordVal = $.trim($password.val()),
+            $isRem = $('#isRem'),
+            isRemVal = $.trim($isRem);
             
             if(usernameVal.length === 0)
             {
@@ -132,7 +134,8 @@
               datatype: 'json',
               data: {
                 username: usernameVal,
-                password: passwordVal
+                password: passwordVal,
+                isrem: isRemVal
               },
               success: function(data){
                 if(data){

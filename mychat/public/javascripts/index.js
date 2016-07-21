@@ -11,19 +11,21 @@ $(document).ready(function() {
         $('#bottom-ul').show();
 
         if ($(this).next('div').attr('id') === 'qq') {
-            moveWindow($(this).next('div').attr('id'), $(this).next('div').attr('id'), 1);
+            moveWindow($(this).next('div').attr('id'), $(this).next('div').attr('id'));
 
         }
         if ($(this).next('div').attr('id') === 'photo') {
-            moveWindow($(this).next('div').attr('id'), $(this).next('div').attr('id'), 2);
+            moveWindow($(this).next('div').attr('id'), $(this).next('div').attr('id'));
         }
         if ($(this).next('div').attr('id') === 'baidu') {
-            moveWindow($(this).next('div').attr('id'), $(this).next('div').attr('id'), 3);
+            moveWindow($(this).next('div').attr('id'), $(this).next('div').attr('id'));
 
         }
 
-        $(this).next('div').show().children('div').show().width(0);
-        $(".title-frame").animate({ width: "100%" }, 300);
+        var offsetLeft = $(this).offset().left;
+
+        $(this).next('div').show().children('div').show().width(0).height(0);
+        $(".title-frame").animate({ width: "100%" ,height:"100%" }, 300);
         $(".window-frame").animate({ width: "100%", height: "100%" }, 300);
     });
     $('.close-window').click(function() {
@@ -46,7 +48,7 @@ $(document).ready(function() {
             $(this).text('向下还原');
             $(this).parent().parent().css({
                 width: "100%",
-                height: "90%"
+                height: "100%"
             });
             removeCenter(g($(this).parent().parent().attr('id')));
         }
@@ -110,9 +112,7 @@ function removeCenter(element) {
 var mouseOffsetX = 0;
 var mouseOffsetY = 0;
 
-var isDraging1 = false;
-var isDraging2 = false;
-var isDraging3 = false;
+var isDraging = false;
 
 function moveWindow(windowTitle, window, isDraging) {
     //监听鼠标在标题栏上按下的事件
@@ -121,15 +121,9 @@ function moveWindow(windowTitle, window, isDraging) {
         console.log(isDraging);
         mouseOffsetX = e.pageX - g(window).offsetLeft;
         mouseOffsetY = e.pageY - g(window).offsetTop;
-        if (isDraging === 1) {
-            isDraging1 = true;
-        }
-        if (isDraging === 2) {
-            isDraging2 = true;
-        }
-        if (isDraging === 3) {
-            isDraging3 = true;
-        }
+
+        isDraging = true;
+
         document.getElementById('qqmask').style.display = 'block';
         document.getElementById('photomask').style.display = 'block';
         document.getElementById('baidumask').style.display = 'block';
@@ -142,19 +136,8 @@ function moveWindow(windowTitle, window, isDraging) {
 
         var moveX = 0;
         var moveY = 0;
-        var temp;
 
-        if (isDraging === 1) {
-            temp = isDraging1;
-        }
-        if (isDraging === 2) {
-            temp = isDraging2;
-        }
-        if (isDraging === 3) {
-            temp = isDraging3;
-        }
-
-        if (temp === true) {
+        if (isDraging === true) {
             moveX = mouseX - mouseOffsetX;
             moveY = mouseY - mouseOffsetY;
 
@@ -175,9 +158,7 @@ function moveWindow(windowTitle, window, isDraging) {
         }
     };
     g(window).onmouseup = function() {
-        isDraging1 = false;
-        isDraging2 = false;
-        isDraging3 = false;
+        isDraging = false;
         document.getElementById('qqmask').style.display = 'none';
         document.getElementById('photomask').style.display = 'none';
         document.getElementById('baidumask').style.display = 'none';

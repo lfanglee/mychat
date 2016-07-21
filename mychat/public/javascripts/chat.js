@@ -53,21 +53,21 @@ Chat.prototype = {
                 color = null;
             messageInput.value = '';
             messageInput.focus();
-            if (msg.trim().length != 0) {
+            if (msg.trim().length !== 0){
                 that.socket.emit('postMsg', msg, color, fontSizeT, font_familyT, boldT, iT);
                 that._displayNewMsg('me', msg, color, fontSizeT, font_familyT, boldT, iT);
                 return;
-            };
+            }
         }, false);
         document.getElementById('messageInput').addEventListener('keyup', function(e) {
             var messageInput = document.getElementById('messageInput'),
                 msg = messageInput.value,
                 color = null;
-            if (e.keyCode == 13 && msg.trim().length != 0) {
+            if (e.keyCode == 13 && msg.trim().length !== 0) {
                 messageInput.value = '';
                 that.socket.emit('postMsg', msg, color, fontSizeT, font_familyT, boldT, iT);
                 that._displayNewMsg('me', msg, color, fontSizeT, font_familyT, boldT, iT);
-            };
+            }
         }, false);
         document.getElementById('close-btn').addEventListener('click', function() {
             window.location = '/logout';

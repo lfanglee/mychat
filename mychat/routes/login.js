@@ -11,7 +11,7 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
     var userName = req.body.username,
         userPwd = req.body.password,
-        isRem = req.body.chbRem,
+        isRem = req.body.isrem,
         md5 = crypto.createHash('md5');
        
     User.getUserByUserName(userName, function (err, results) {                            
@@ -34,7 +34,7 @@ router.post('/', function(req, res) {
                 res.locals.username = userName;
                 req.session.username = res.locals.username;  
                 console.log(req.session.username);
-                console.log('ffffffffffffffffffffffffffffff'+results);
+                console.log(isRem+results);
                 res.send({status:'success',message:''});
                 return;
             } 

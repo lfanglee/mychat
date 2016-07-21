@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 	<title>Document</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
@@ -42,6 +42,7 @@
                     <h3>Photo</h3>
                     <a class="close-window">关闭</a>
                     <a class="max-big">向下还原</a>
+                    <a id="min">最小化</a>
                     <a class="reload" name="reloadPhoto"onclick="window.open(document.all.photo.src,'photo','')">刷新</a>
                     <div class="fixclear"></div>
                 </div>
@@ -61,14 +62,14 @@
 				<div style="opacity: 0.9" class="title-frame" id="baiduTitle">
                     <h3>Baidu</h3>
                     <a class="close-window">关闭</a>
-                    <a class="max-big">最大化</a>
-                    <a class="max-small">还原</a>
+                    <a class="max-big">向下还原</a>
+                    <a id="min">最小化</a>
                     <a class="reload" name="reloadBaidu"onclick="window.open(document.all.baidu.src,'baidu','')">刷新</a>
                     <div class="fixclear"></div>
                 </div>
                 <div class="window-frame">
                 	<div class="mask" id="baidumask"></div>
-                    <iframe name="baidu" id="frameBaidu" frameborder="0" src="https://www.baidu.com/">
+                    <iframe name="baidu" id="frameBaidu" frameborder="0" src="">
 
                     </iframe>
                 </div>
