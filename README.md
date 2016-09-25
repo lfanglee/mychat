@@ -13,3 +13,5 @@ a project of chatroom and virtualdesk
   - 打开model文件夹下的msg.js和user.js将数据库的用户名和密码修改成你自己的数据库名称和密码  
   - 在mychat根目录下(即package.json所在文件夹)执行npm install安装依赖库
   - 打开浏览器访问localhost:8000即可看到效果
+  
+## [线上预览](http://123.206.203.27:8000/)
